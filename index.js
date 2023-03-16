@@ -310,29 +310,60 @@ const persons = [
 // nomor 1
 console.log("----- Nomor 1 -----")
 console.log("Person yang registered dibawah tahun 2022 :")
+// menggunakan array method filter
+let personRegister = persons.filter(x => {
+  return parseInt(x.registered.substring(0, 4)) < 2022 
+})
+//console.log(personRegister);
 
+// menggunakan for loop
+for (let i = 0; i < persons.length; i++) {
+  let year = persons[i].registered.split("-")  
+    if (year[0] < "2022") {
+      // console.log(persons[i].name)      
+    }   
+}
 
 // nomor 2
 console.log("----- Nomor 2 -----")
 console.log("Person yang address-nya Bali :")
+// menggunakan for loop
 for (let i = 0; i < persons.length; i++) {
     if (persons[i].address === 'Bali') {
-      console.log(persons[i])
+      //console.log(persons[i])
     }    
 }
+
+// menggunakan array method filter
+let personAddress = persons.filter(e => {
+  return e.address === 'Bali'
+})
+// console.log(personAddress)
+
 
 // nomor 3
 console.log("----- Nomor 3 -----")
 console.log("Display friends yang hobby-nya football :")
+// menggunakan for loop
 for (let i = 0; i < persons.length; i++) {
   for (let j = 0; j < persons[i].friends.length; j++) {
     for(let k = 0; k < persons[i].friends[j].hobby.length; k++) {
       if (persons[i].friends[j].hobby[k].hobby === "football") {
-      console.log(persons[i].friends[j].name)
+      //console.log(persons[i].friends[j].name)
       }
     }       
   }   
 }
+
+// // cara lain
+// for (let i = 0; i < persons.length; i++) {
+//   console.log(persons[i].friends.filter(e => {
+//     return e.hobby.filter(x => {
+//       return x.hobby === 'football'
+//     })
+//   }))
+// }
+
 
 // nomor 4
 console.log("----- Nomor 4 -----")
@@ -340,10 +371,19 @@ console.log("Display hobby dari friends id 2 :")
 for (let i = 0; i < persons.length; i++) {
   for (let j = 0; j < persons[i].friends.length; j++) {
     if (persons[i].friends[j].id === 2) {
-      console.log(persons[i].friends[j].hobby)
+      //console.log(persons[i].friends[j].hobby)
     }    
   }
 }
+
+// cara lain
+let hobbyFriends = persons.map(e => {
+  return e.friends.filter(x => {
+    return x.id === 2
+  })
+})
+//console.log(hobbyFriends)
+
 
 // nomor 5
 console.log("----- Nomor 5 -----")
@@ -352,11 +392,19 @@ for (let i = 0; i < persons.length; i++) {
   for (let j = 0; j < persons[i].friends.length; j++) {
     for(let k = 0; k < persons[i].friends[j].hobby.length; k++) {
       if (persons[i].friends[j].gender === 'male' && persons[i].friends[j].hobby[k].hobby === 'basketball') {
-        console.log(persons[i].friends[j].name)
+        //console.log(persons[i].friends[j].name)
       }
     } 
   }
 }
+
+// cara lain
+for (let i = 0; i < persons.length; i++) {
+  if (persons[i].friends.filter(e => {return e.gender === 'male' && e.hobby.filter(x => {x.hobby === 'basketball'})})) {
+    //console.log(persons[i].friends)
+  } 
+}
+
 
 // nomor 6
 console.log("----- Nomor  6 -----")
@@ -364,11 +412,18 @@ console.log("Display friends yang isActive nya true dan gender nya female dan fa
 for (let i = 0; i < persons.length; i++) {
   for (let j = 0; j < persons[i].friends.length; j++) {
     if (persons[i].friends[j].isActive === true && persons[i].friends[j].gender === 'female' && persons[i].friends[j].favoriteFruit === 'strawberry') {
-      console.log(persons[i].friends[j].name)
-    }
-    
+      //console.log(persons[i].friends[j].name)
+    }    
   }
 }
+
+// cara lain
+for (let i = 0; i < persons.length; i++) {
+  let friendFemale = persons[i].friends.filter(e => {return e.isActive === true && e.gender === 'female' && e.favoriteFruit === 'strawberry'})
+    //console.log(friendFemale)
+  
+}
+
 
 // nomor 7
 console.log("----- Nomor  7 -----")
@@ -376,10 +431,18 @@ console.log("Display siapa saja yang mempunyai teman name Theresia :")
 for (let i = 0; i < persons.length; i++) {
   for (let j = 0; j < persons[i].friends.length; j++) {
     if (persons[i].friends[j].name === 'Theresia') {
-      console.log(persons[i].name)
+      //console.log(persons[i].name)
     }    
   } 
 }
+
+// // cara lain
+// console.log(persons.filter(e => {
+//   return e.friends.find(x => {
+//     return x.name === 'Theresia'
+//   })
+// }))
+
 
 // nomor 8
 console.log("----- Nomor 8 -----")
@@ -387,10 +450,11 @@ console.log("display hobby id 1 dari friends yang isActive nya true :")
 for (let i = 0; i < persons.length; i++) {
   for (let j = 0; j < persons[i].friends.length; j++) {
     if (persons[i].friends[j].isActive === true) {
-      console.log(persons[i].friends[j].hobby.filter(obj => obj.id === 1))
+      //console.log(persons[i].friends[j].hobby.filter(obj => obj.id === 1))
     }    
   }  
 }
+
 
 // nomor 9
 console.log("----- Nomor  9 -----")
@@ -398,18 +462,20 @@ console.log("display person yang eye color nya brown dan favorite fruit nya bana
 for (let i = 0; i < persons.length; i++) {
   for (let j = 0; j < persons[i].friends.length; j++) {
     if (persons[i].eyeColor === 'brown' && persons[i].friends[j].favoriteFruit === 'banana' && persons[i].friends[j].hobby.find(obj => obj.hobby === 'basketball')) {
-      console.log(persons[i].name)
+      // console.log(persons[i].name)
     }    
   }  
 }
+
 
 // nomor 10
 console.log("----- Nomor  10 -----")
 console.log("Display person yang mempunyai friends gender male atau favorite fruit nya banana dan registered di tahun 2023 :")
 for (let i = 0; i < persons.length; i++) {
   for (let j = 0; j < persons[i].friends.length; j++) {
-    if (persons[i].friends[j].gender === 'male' || persons[i].friends[j].favoriteFruit === 'banana' && persons[i].registered === '2023') {
-      console.log(persons[i].name)
+    if (persons[i].friends[j].gender === 'male' || persons[i].friends[j].favoriteFruit === 'banana' && parseInt(persons[i].registered.substring(0,4)) === 2023) {
+      // console.log(persons[i].name)
+      break
     }
   } 
 }
